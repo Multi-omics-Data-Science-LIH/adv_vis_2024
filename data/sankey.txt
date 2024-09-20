@@ -1,0 +1,60 @@
+Old	New	Freq	Newer
+Diffuse astrocytoma	Diffuse astrocytoma, IDH-mutant	5.16991525423729	Astrocytoma, IDH-mutant
+ (CNS WHO grade 2-4)
+Diffuse astrocytoma	Diffuse astrocytoma, IDH-wildtype	0.168813559322034	Diffuse midline glioma, H3K27-altered
+Diffuse astrocytoma	Diffuse astrocytoma, IDH-wildtype	4.69857493857494	Glioblastoma, IDH-wildtype
+ (CNS WHO grade 4)
+Diffuse astrocytoma	Diffuse midline glioma, H3 K27M-mutant	0.337627118644068	Diffuse midline glioma, H3K27-altered
+Anaplastic astrocytoma	Anaplastic astrocytoma, IDH-wildtype	0.168813559322034	Diffuse midline glioma, H3K27-altered
+Anaplastic astrocytoma	Anaplastic astrocytoma, IDH-wildtype	4.69857493857494	Glioblastoma, IDH-wildtype
+ (CNS WHO grade 4)
+Anaplastic astrocytoma	Anaplastic astrocytoma, IDH-mutant	5.16991525423729	Astrocytoma, IDH-mutant
+ (CNS WHO grade 2-4)
+Anaplastic astrocytoma	Diffuse midline glioma, H3 K27M-mutant	0.337627118644068	Diffuse midline glioma, H3K27-altered
+Glioblastoma	Glioblastoma, IDH-mutant	2.95423728813559	Astrocytoma, IDH-mutant
+ (CNS WHO grade 2-4)
+Glioblastoma	Glioblastoma, IDH-wildtype	29.6352825552826	Glioblastoma, IDH-wildtype
+ (CNS WHO grade 4)
+Glioblastoma	Glioblastoma, IDH-wildtype	0.295423728813559	Diffuse midline glioma, H3K27-altered
+Glioblastoma	Glioblastoma, IDH-wildtype	1.494	Diffuse hemispheric glioma, H3G34-mutant
+Glioblastoma	Diffuse midline glioma, H3 K27M-mutant	1.18169491525424	Diffuse midline glioma, H3K27-altered
+Gliomatosis cerebri	Diffuse astrocytoma, IDH-mutant	0.84406779661017	Astrocytoma, IDH-mutant
+ (CNS WHO grade 2-4)
+Gliomatosis cerebri	Anaplastic astrocytoma, IDH-mutant	0.84406779661017	Astrocytoma, IDH-mutant
+ (CNS WHO grade 2-4)
+Gliomatosis cerebri	Glioblastoma, IDH-mutant	0.84406779661017	Astrocytoma, IDH-mutant
+ (CNS WHO grade 2-4)
+Gliomatosis cerebri	Diffuse astrocytoma, IDH-wildtype	0.783095823095823	Glioblastoma, IDH-wildtype
+ (CNS WHO grade 4)
+Gliomatosis cerebri	Anaplastic astrocytoma, IDH-wildtype	0.783095823095823	Glioblastoma, IDH-wildtype
+ (CNS WHO grade 4)
+Gliomatosis cerebri	Glioblastoma, IDH-wildtype	0.783095823095823	Glioblastoma, IDH-wildtype
+ (CNS WHO grade 4)
+Oligodendroglioma	Diffuse astrocytoma, IDH-mutant	1.05508474576271	Astrocytoma, IDH-mutant
+ (CNS WHO grade 2-4)
+Oligodendroglioma	Diffuse astrocytoma, IDH-wildtype	0.978869778869779	Glioblastoma, IDH-wildtype
+ (CNS WHO grade 4)
+Oligodendroglioma	Oligodendroglioma, IDH-mutant & 1p/19q-codeleted	7.05132743362832	Oligodendroglioma, IDH-mutant & 1p/19q-codeleted
+ (CNS WHO grade 2-3)
+Anaplastic oligodendroglioma	Anaplastic astrocytoma, IDH-mutant	0.527542372881356	Astrocytoma, IDH-mutant
+ (CNS WHO grade 2-4)
+Anaplastic oligodendroglioma	Glioblastoma, IDH-mutant	0.527542372881356	Astrocytoma, IDH-mutant
+ (CNS WHO grade 2-4)
+Anaplastic oligodendroglioma	Anaplastic astrocytoma, IDH-wildtype	0.489434889434889	Glioblastoma, IDH-wildtype
+ (CNS WHO grade 4)
+Anaplastic oligodendroglioma	Glioblastoma, IDH-wildtype	0.489434889434889	Glioblastoma, IDH-wildtype
+ (CNS WHO grade 4)
+Anaplastic oligodendroglioma	Anaplastic oligodendroglioma, IDH-mutant & 1p/19q-codeleted	7.05132743362832	Oligodendroglioma, IDH-mutant & 1p/19q-codeleted
+ (CNS WHO grade 2-3)
+Oligoastrocytoma	Diffuse astrocytoma, IDH-mutant	3.48177966101695	Astrocytoma, IDH-mutant
+ (CNS WHO grade 2-4)
+Oligoastrocytoma	Diffuse astrocytoma, IDH-wildtype	3.23027027027027	Glioblastoma, IDH-wildtype
+ (CNS WHO grade 4)
+Oligoastrocytoma	Oligodendroglioma, IDH-mutant & 1p/19q-codeleted	2.90867256637168	Oligodendroglioma, IDH-mutant & 1p/19q-codeleted
+ (CNS WHO grade 2-3)
+Anaplastic oligoastrocytoma	Anaplastic astrocytoma, IDH-mutant	3.48177966101695	Astrocytoma, IDH-mutant
+ (CNS WHO grade 2-4)
+Anaplastic oligoastrocytoma	Anaplastic astrocytoma, IDH-wildtype	3.23027027027027	Glioblastoma, IDH-wildtype
+ (CNS WHO grade 4)
+Anaplastic oligoastrocytoma	Anaplastic oligodendroglioma, IDH-mutant & 1p/19q-codeleted	2.90867256637168	Oligodendroglioma, IDH-mutant & 1p/19q-codeleted
+ (CNS WHO grade 2-3)
