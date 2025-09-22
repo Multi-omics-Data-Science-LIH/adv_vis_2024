@@ -3,8 +3,8 @@ title: "ggplot"
 author: "Reka Toth "
 ddate: '`r format(Sys.time(), "%d %B, %Y")`'
 output:
- # html_notebook: default
-  workflowr::wflow_html:
+ html_document: 
+#  workflowr::wflow_html:
     toc: false
     code_folding: "hide"
 #output: workflowr::wflow_html:
@@ -20,10 +20,7 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 ## ggplot basics
 
 ```{r}
-#| label: load-packages
-#| include: false
-#| warning: false
-#| message: false
+
 
 library(tidyr)
 library(dplyr)
@@ -40,8 +37,6 @@ library(ggsci)
 Data source: [CBioPortal](https://www.cbioportal.org/), [TCGA, LGG](https://www.cbioportal.org/study/summary?id=lgg_tcga_pan_can_atlas_2018)
 
 ```{r}
-#| warning: false
-
 
 LGG <- read.delim("data/lgg_tcga_pan_can_atlas_2018_clinical_data.tsv")
 ```
@@ -77,9 +72,8 @@ ggplot(LGG)
 Let's add some
 
 ```{r}
-#| warning: false
 
-ggplot(LGG)+
+ggplot(data = LGG)+
   geom_point(aes(x = Diagnosis.Age, y=MSI.MANTIS.Score))
 
 ```
@@ -87,11 +81,15 @@ ggplot(LGG)+
 Now add additional layers of information:
 
 ```{r}
-#| warning: false
 LGG %>%
   filter(!is.na(Sex)) %>%
 ggplot()+
   geom_point(aes(x = Diagnosis.Age, y=MSI.MANTIS.Score, color=Sex))
+
+LGG %>%
+  filter(!is.na(Sex)) %>%
+ggplot()+
+  geom_point(aes(x = Diagnosis.Age, y=MSI.MANTIS.Score), color="red")
 
 ```
 
@@ -102,8 +100,8 @@ Now add statistics:
 p <- ggplot(LGG,aes(x = Diagnosis.Age, y=MSI.MANTIS.Score))
 p +
   geom_point()+
-  #geom_smooth()
-  stat_smooth(method = "lm", formula = y ~ x, se=T, level=0.95)
+  geom_smooth(method = "lm", formula = y ~ x, se=T, level=0.95 )
+  #stat_smooth(method = "lm", formula = y ~ x, se=T, level=0.95)
 #this can also be used as geom_smooth
 
 ```
@@ -111,7 +109,6 @@ p +
 Also additional geoms:
 
 ```{r}
-#| warning: false
 
 lm_p <- function(lm){
   e <- summary(lm)
@@ -133,7 +130,7 @@ p +
              color="red") # this is fine -- all points red
 
 p +
-  geom_point(aes(size = Aneuploidy.Score),# incorrect! 2 is not a variable
+  geom_point(aes(size = Aneuploidy.Score),
              color="red")
 ```
 
@@ -168,7 +165,7 @@ LGG %>%
   filter(!is.na(Race.Category)) %>%
   mutate(categories="Race") %>%
   ggplot() +
-  geom_bar(aes(x=categories,  fill=Race.Category))
+  geom_bar(aes(x=categories,  fill=Race.Category), color="black")
 
 LGG %>%
   filter(!is.na(Race.Category)) %>%
@@ -176,6 +173,9 @@ LGG %>%
   ggplot() +
   geom_bar(aes(x=categories,  fill=Race.Category), position = "dodge2")
 
+  ggplot(LGG) +
+  geom_bar(aes(x=Sex,  fill=Race.Category))
+  
 ```
 
 #### Inheritance
@@ -202,7 +202,7 @@ LGG %>%
 
 LGG %>%
   filter(!is.na(Subtype) & !is.na(Sex)) %>%
- ggplot(aes(x = Subtype, y=MSI.MANTIS.Score)) + geom_boxplot( aes(fill=Sex),width=0.4) + geom_jitter(width = 0.08, alpha=0.7, color="lightpink4")
+ ggplot(aes(x = Subtype, y=MSI.MANTIS.Score, fill=Sex, color=Sex)) + geom_boxplot( width=0.4) + geom_jitter(width = 0.08, alpha=0.7)
 
 
 ```
@@ -220,7 +220,7 @@ ggplot(LGG,aes(x = Diagnosis.Age, y=MSI.MANTIS.Score))+
   geom_point(aes(color=Sex))+
   stat_smooth(method = "lm", formula = y ~ x, se=T, level=0.95) + 
    scale_y_continuous(name = "Score", limits=c(0.2, 0.4))+
-  scale_x_continuous(name="Age of diagnosis", breaks = c(0,10,50,60,100), labels = c(0,10,50,60,100), limits = c(0,100), position = "top")
+  scale_x_continuous(name="Age of diagnosis", breaks = c(0,10,50,60,100), labels = c("zero",10,50,60,100), limits = c(0,100), position = "top")
 
 ```
 
@@ -230,8 +230,8 @@ ggplot(LGG,aes(x = Diagnosis.Age, y=MSI.MANTIS.Score))+
 
 ggplot(LGG,aes(x = Diagnosis.Age, y=MSI.MANTIS.Score))+
   geom_point(aes(color=Sex))+
-  stat_smooth(method = "lm", formula = y ~ x, se=T, level=0.95) + 
-   scale_color_brewer(palette = "Set2")
+  stat_smooth(method = "lm", formula = y ~ x, se=T, level=0.95, color="red") + 
+   scale_color_brewer(palette = "Set1")
 
 LGG %>%
   filter(!is.na(Subtype) & !is.na(Sex)) %>%
@@ -309,11 +309,8 @@ Specific theme elements can be overridden using `theme()`. For example:
 
 ```{r}
 p + theme_minimal() +
-  theme( legend.position = "none" )
-           element_text(angle = 45, color = "turquoise")
-
-
-
+  theme( legend.position = "none" , text=element_text(angle = 45, color = "turquoise"))
+           
 
 
 
@@ -334,8 +331,7 @@ p + theme_new
 
 ### Saving
 
-```{r}
-#| fig-format: pdf
+```{r plots, fig.format=c("pdf", "png"), fig.width=5, fig.height=6}
 
 p + theme_new
 ggsave(filename = "figures/nice_plot.pdf")
@@ -350,8 +346,7 @@ ggsave(g, filename = "figures/nice_plot_big.pdf", width = 5, height = 9)
 #### Cowplot
 
 ```{r}
-#|wwarning: false
-
+library(patchwork)
 p1 <- ggplot(LGG,aes(x = Diagnosis.Age, y=MSI.MANTIS.Score))+
   geom_point(aes(color=Sex))+
   stat_smooth(method = "lm", formula = y ~ x, se=T, level=0.95) + 
@@ -370,6 +365,7 @@ plot_grid(p1, p2, labels = c('A', 'B'), label_size = 12, rel_widths = c(3,2))
 plot_grid(p1, p2, p2, labels = c('A', 'B', 'C'), label_size = 12, rel_widths = c(3,2,2), nrow = 2)
 
 
+
 ```
 
 ### Color palettes
@@ -382,7 +378,7 @@ LGG %>%
   mutate(categories="Race") %>%
   ggplot() +
   geom_bar(aes(x=categories,  fill=Race.Category), position = "dodge2")+
-  scale_fill_lancet()
+  scale_fill_rickandmorty()
 
 LGG %>%
   filter(!is.na(Race.Category)) %>%
@@ -407,8 +403,9 @@ ggplot(LGG[1:30,],aes(x = Diagnosis.Age, y=MSI.MANTIS.Score))+
 ```
 
 ```{r}
-
-e <- ggplot(LGG.sum, aes(x=Cancer.Type.Detailed, y=Aneuploidy.Score)) + 
+LGG.sum %>% 
+  mutate(Cancer.Type.Detailed = fct_reorder(Cancer.Type.Detailed, desc(Aneuploidy.Score))) %>%
+ggplot( aes(x=Cancer.Type.Detailed, y=Aneuploidy.Score)) + 
   geom_bar(stat="identity")
 LGG.sum$Cancer.Type.Detailed <- factor(LGG.sum$Cancer.Type.Detailed, levels = LGG.sum$Cancer.Type.Detailed[order(LGG.sum$Aneuploidy.Score, decreasing = T)])
 ggplot(LGG.sum, aes(x=Cancer.Type.Detailed, y=Aneuploidy.Score)) + 

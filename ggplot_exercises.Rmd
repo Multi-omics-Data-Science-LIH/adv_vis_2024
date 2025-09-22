@@ -3,8 +3,7 @@ title: "ggplot exercises"
 author: "Reka Toth "
 ddate: '`r format(Sys.time(), "%d %B, %Y")`'
 output:
- # html_notebook: default
-  workflowr::wflow_html:
+  html_document:
     toc: false
     code_folding: "hide"
 #output: workflowr::wflow_html:
@@ -20,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 # Exercises
 
 1. Use the iris dataset.
-2. plot a dotplot using sepal.length and sepal.width
+2. plot a scatterplot using sepal.length and sepal.width
 3. Color the dots by Species
 4. Add linear regression curve for the whole dataset
 5. Add linear regression curve colored by species
@@ -32,9 +31,10 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 11. Change the theme to theme_bw
 
 ```{r}
-
-  
-
+library(ggplot2)
+data(iris)
+iris
+ggplot(iris, aes(Sepal.Length, Sepal.Width))+geom_point(pch=21, color="black", fill=alpha("red", 0.2), size=4)+stat_smooth(method="lm")+scale_x_continuous(name = "Sepal Width")+theme(axis.title.y = element_blank())
 
 
 

@@ -3,8 +3,7 @@ title: "Heatmap"
 author: "Reka Toth "
 ddate: '`r format(Sys.time(), "%d %B, %Y")`'
 output:
- # html_notebook: default
-  workflowr::wflow_html:
+  html_document: 
     toc: false
     code_folding: "hide"
 #output: workflowr::wflow_html:
@@ -43,7 +42,7 @@ colnames(ge) <- substr(colnames(ge), 1, 15)
 rownames(LGG) <- LGG$Sample.ID
 LGG_anno <- LGG[colnames(ge),]
 
-pheatmap(ge[1:50,], scale = "row", show_rownames = F, show_colnames = F,  colorRampPalette(c("navy", "white", "red"))(50))
+pheatmap(ge[1:50,],  show_rownames = F, show_colnames = F,  colorRampPalette(c("navy", "white", "red"))(50))
 
 pheatmap(ge[1:50,], scale = "row", show_rownames = F, show_colnames = F, colorRampPalette(c("navy", "white", "red"))(50), annotation_col = LGG_anno[,c("Sex", "Cancer.Type.Detailed")])
 
@@ -53,10 +52,13 @@ ann_colors = list(
     Cancer.Type.Detailed = c(Astrocytoma = "#1B9E77", "Low-Grade Glioma (NOS)" = "#D95F02", Oligoastrocytoma = "#7570B3", Oligodendroglioma = "#E7298A")
 )
 
-pheatmap(ge[1:50,], scale = "row", show_rownames = F, show_colnames = F, colorRampPalette(c("navy", "white", "red"))(50), annotation_col = LGG_anno[,c("Sex", "Cancer.Type.Detailed")], annotation_colors = ann_colors )
+pheatmap(ge[1:50,], scale = "row", show_rownames = F, show_colnames = F, colorRampPalette(c("navy", "white", "red"))(50), annotation_col = LGG_anno[,c("Sex", "Cancer.Type.Detailed")], annotation_colors = ann_colors)
 
-#pdf("figures/heatmap.pdf", width = )
-p <- pheatmap::pheatmap(ge[1:50,], scale = "row", show_rownames = F, show_colnames = F, colorRampPalette(c("navy", "white", "red"))(50), annotation_col = LGG_anno[,c("Sex", "Cancer.Type.Detailed")], annotation_colors = ann_colors, cutree_cols=2,filename ="figures/heatmap.pdf")
+pdf("figures/heatmap.pdf")
+p <- pheatmap::pheatmap(ge[1:50,], scale = "row", show_rownames = F, show_colnames = F, colorRampPalette(c("navy", "white", "red"))(50), annotation_col = LGG_anno[,c("Sex", "Cancer.Type.Detailed")], annotation_colors = ann_colors, cutree_cols=2)
+dev.off()
+p
+
 
 ```
 
@@ -76,7 +78,28 @@ ha = HeatmapAnnotation(df = LGG_anno[,c("Sex", "Cancer.Type.Detailed")],
 )
 )
 
-Heatmap(ge_sc, show_row_names = F, show_column_names = F, top_annotation = ha, use_raster = )
+Heatmap(ge_sc, show_row_names = F, show_column_names = F, top_annotation = ha )
+
+```
+
+```{r}
+library(UpSetR)
+genesets <- list(genes_1=rownames(ge)[1:100], genes_2=rownames(ge)[c(1:50, 101:150)], genes3=rownames(ge)[c(120:150, 1:20, 160:170)])
+genesets
+
+
+df <- data.frame(matrix(data=NA, nrow=length(unique(unlist(genesets))), ncol=3))
+
+rownames(df) <- unique(unlist(genesets))
+colnames(df) <- c("genes_1", "genes_2", "genes_3")
+df$genes_1 <- as.numeric(rownames(df) %in% genesets$genes_1)
+df$genes_2 <- as.numeric(rownames(df) %in% genesets$genes_2)
+df$genes_3 <- as.numeric(rownames(df) %in% genesets$genes3)
+
+
+upset(df)
+
+
 
 ```
 
